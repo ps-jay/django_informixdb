@@ -141,12 +141,16 @@ FROM base AS multipy
 
 COPY --from=builder-py36 /opt/py36/ /opt/py36/
 COPY --from=builder-py37 /opt/py37/ /opt/py37/
+COPY --from=builder-py38 /opt/py38/ /opt/py38/
 
 COPY --from=builder-py36 /src/.tox/ /src/.tox/
 COPY --from=builder-py36 /src/.cache/ /src/.cache/
 
 COPY --from=builder-py37 /src/.tox/ /src/.tox/
 COPY --from=builder-py37 /src/.cache/ /src/.cache/
+
+COPY --from=builder-py38 /src/.tox/ /src/.tox/
+COPY --from=builder-py38 /src/.cache/ /src/.cache/
 
 ENV PATH=/opt/py38/bin:/opt/py37/bin:/opt/py36/bin:"${PATH}"
 RUN pip3 --no-cache-dir install tox
